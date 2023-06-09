@@ -24,8 +24,7 @@ export default function RootLayout({
             <a href="/read/2">css</a>
           </li>
         </ol>
-        <h2>Welcome</h2>
-        Hello, WEB!!
+        {children}
         <ul>
           <li>
             <a href="/create">Create</a>
