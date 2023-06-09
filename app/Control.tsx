@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export function Control() {
   const params = useParams();
+  const router = useRouter();
   const id = params.id;
   return (
     <>
@@ -18,7 +19,20 @@ export function Control() {
               <Link href={"/update/" + id}>Update</Link>
             </li>
             <li>
-              <button>Delete</button>
+              <button
+                onClick={() => {
+                  fetch(`${process.env.NEXT_PUBLIC_API_URL}topics/${id}`, {
+                    method: "DELETE",
+                  })
+                    .then((resp) => resp.json())
+                    .then(() => {
+                      router.push("/");
+                      router.refresh();
+                    });
+                }}
+              >
+                Delete
+              </button>
             </li>
           </>
         )}
