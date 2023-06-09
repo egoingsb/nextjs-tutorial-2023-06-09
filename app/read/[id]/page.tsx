@@ -1,6 +1,7 @@
 export default async function Read(props: { params: { id: string } }) {
   const resp = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "topics/" + props.params.id
+    process.env.NEXT_PUBLIC_API_URL + "topics/" + props.params.id,
+    { next: { revalidate: 0 } }
   );
   const result = await resp.json();
   return (
