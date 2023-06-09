@@ -1,9 +1,12 @@
-export default function Read(props: { params: { id: string } }) {
-  console.log("🚀 ~ file: page.tsx:2 ~ Read ~ params:", props.params);
+export default async function Read(props: { params: { id: string } }) {
+  const resp = await fetch(
+    process.env.NEXT_PUBLIC_API_URL + "topics/" + props.params.id
+  );
+  const result = await resp.json();
   return (
     <>
-      <h2>Read</h2>
-      parameter id - {props.params.id}
+      <h2>{result.title}</h2>
+      {result.body}
     </>
   );
 }
