@@ -11,7 +11,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const resp = await fetch(process.env.NEXT_PUBLIC_API_URL + "topics");
+  const resp = await fetch(process.env.NEXT_PUBLIC_API_URL + "topics", {
+    next: { revalidate: 0 },
+  });
   const result = await resp.json();
   return (
     <html lang="en">
